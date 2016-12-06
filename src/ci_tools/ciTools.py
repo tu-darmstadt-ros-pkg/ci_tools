@@ -36,6 +36,22 @@ class SimulationControl(object):
         FlexBEHelper.start_flexbe_behavior(self._mission_behavior)
         rospy.Timer(rospy.Duration(self._mission_sim_time_in_sec), self._stop_node)
 
+    def start_sim(self):
+        """Unpauses gazebo."""
+        time.sleep(20)
+        GazeboHelper.unpause_physics()
+        time.sleep(5)
+
+    def start_behavior(self, behavior_to_start):
+        """Tries to start FlexBE behavior."""
+        time.sleep(20)
+        FlexBEHelper.start_flexbe_behavior(behavior_to_start)
+        time.sleep(5)
+
+    def start_simulation_timer(self):
+        """Starts callback, that sets _max_sim_time_reached if time over."""
+        rospy.Timer(rospy.Duration(self._mission_sim_time_in_sec), self._stop_node)
+
     def perform_final_actions(self):
         """Calls final_action methods of all imported finalizers."""
         for finalizer_class in self._finalizer_classes:

@@ -1,6 +1,6 @@
 from std_srvs.srv import Empty
 import rospy
-from logInfo import LogInfo
+from ciLogInfo import CiLogInfo
 
 
 class GazeboHelper(object):
@@ -11,4 +11,4 @@ class GazeboHelper(object):
         """Sends signal to Gazebo to unpause physics."""
         physics_client = rospy.ServiceProxy('/gazebo/unpause_physics', Empty)
         physics_client()
-        LogInfo.log("[helpers.GazeboHelper] Gazebo physics unpaused.")
+        CiLogInfo.log("[helpers.GazeboHelper] Gazebo physics unpaused.")

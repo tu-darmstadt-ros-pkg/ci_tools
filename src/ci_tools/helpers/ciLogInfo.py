@@ -1,10 +1,10 @@
 import rospy
 
 
-class LogInfo(object):
+class CiLogInfo(object):
     """Helper methods regarding logging."""
 
     @staticmethod
     def log(message):
         """Uses rospy.loginfo() to post message with additional"""
-        rospy.loginfo("[argo_ci_tools]: " + message)
+        rospy.loginfo("[ci_tools]: " + message)
