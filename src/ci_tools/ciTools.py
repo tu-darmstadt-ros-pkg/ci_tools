@@ -46,7 +46,7 @@ class SimulationControl(object):
         """Tries to start FlexBE behavior."""
         time.sleep(20)
         FlexBEHelper.start_flexbe_behavior(behavior_to_start)
-        time.sleep(5)
+        time.sleep(20)
 
     def start_simulation_timer(self):
         """Starts callback, that sets _max_sim_time_reached if time over."""
