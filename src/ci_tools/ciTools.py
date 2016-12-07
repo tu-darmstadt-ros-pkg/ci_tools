@@ -40,13 +40,13 @@ class SimulationControl(object):
         """Unpauses gazebo."""
         time.sleep(20)
         GazeboHelper.unpause_physics()
-        time.sleep(5)
+        time.sleep(30)
 
     def start_behavior(self, behavior_to_start):
         """Tries to start FlexBE behavior."""
         time.sleep(20)
         FlexBEHelper.start_flexbe_behavior(behavior_to_start)
-        time.sleep(20)
+        time.sleep(5)
 
     def start_simulation_timer(self):
         """Starts callback, that sets _max_sim_time_reached if time over."""
