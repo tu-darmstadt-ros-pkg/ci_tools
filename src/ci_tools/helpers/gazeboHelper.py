@@ -9,6 +9,7 @@ class GazeboHelper(object):
     @staticmethod
     def unpause_physics():
         """Sends signal to Gazebo to unpause physics."""
+        rospy.wait_for_service('/gazebo/unpause_physics')
         physics_client = rospy.ServiceProxy('/gazebo/unpause_physics', Empty)
         physics_client()
         CiLogInfo.log("[helpers.GazeboHelper] Gazebo physics unpaused.")
