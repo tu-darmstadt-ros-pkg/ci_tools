@@ -65,4 +65,5 @@ class SimulationControl(object):
 
     def _stop_node(self, event):
         """Callback that is used to indicate when maximum simulation_time is readed."""
+        self.perform_final_actions()
         self._max_sim_time_reached = True
