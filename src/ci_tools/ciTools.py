@@ -2,6 +2,7 @@ import time
 import rospy
 from helpers.flexBEHelper import FlexBEHelper
 from helpers.gazeboHelper import GazeboHelper
+from helpers.ciLogInfo import CiLogInfo
 
 
 class SimulationControl(object):
@@ -47,6 +48,7 @@ class SimulationControl(object):
 
     def start_simulation_timer(self):
         """Starts callback, that sets _max_sim_time_reached if time over."""
+        CiLogInfo.log("Simulation timer started.")
         rospy.Timer(rospy.Duration(self._mission_sim_time_in_sec), self._stop_node)
 
     def perform_final_actions(self):
