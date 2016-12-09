@@ -18,4 +18,4 @@ class FlexBEHelper(object):
         msg = BehaviorExecutionActionGoal()
         msg.goal.behavior_name = behavior_name
         behavior_publisher.publish(msg)
-        CiLogInfo.log("[helpers.FlexBEHelpler]: New behavior " + behavior_name + " sent to FlexBE.")
+        CiLogInfo.log("[helpers.FlexBEHelper]: New behavior " + behavior_name + " sent to FlexBE.")

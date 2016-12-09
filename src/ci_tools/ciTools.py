@@ -12,7 +12,6 @@ class SimulationControl(object):
         self._max_sim_time_reached = False
         self._mission_finalizers = ""
         self._mission_sim_time_in_sec = 0
-        self._mission_behavior = ""
         self._finalizer_classes = []
 
         self.read_ros_params()
@@ -25,8 +24,6 @@ class SimulationControl(object):
         mission_time_full_param_name = rospy.search_param('mission_sim_time')
         self._mission_sim_time_in_sec = int(rospy.get_param(mission_time_full_param_name))
 
-        mission_behavior_full_param_name = rospy.search_param('mission_behavior')
-        self._mission_behavior = str(rospy.get_param(mission_behavior_full_param_name))
 
     def start_sim_with_behavior(self):
         """Unpauses Gazebo, sends behavior to FlexBE and starts simulation timer."""
