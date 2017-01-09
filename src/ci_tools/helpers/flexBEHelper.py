@@ -1,7 +1,7 @@
 from flexbe_msgs.msg import BehaviorExecutionActionGoal
 import rospy
 import time
-from ciLogInfo import CiLogInfo
+from ci_log import CiLog
 
 
 class FlexBEHelper(object):
@@ -18,4 +18,5 @@ class FlexBEHelper(object):
         msg = BehaviorExecutionActionGoal()
         msg.goal.behavior_name = behavior_name
         behavior_publisher.publish(msg)
-        CiLogInfo.log("[helpers.FlexBEHelper]: New behavior " + behavior_name + " sent to FlexBE.")
+        CiLog.info("[helpers.FlexBEHelper]: New behavior " + behavior_name + " sent to FlexBE.")
+        return True
