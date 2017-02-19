@@ -23,6 +23,7 @@ class SimulationControl(object):
         self._finalizer_classes = []
 
         self.read_ros_params()
+        CiLog.info("Init of SimulationControl constructor finished.")
 
     def read_ros_params(self):
         """Reads parameters that have been set in roslaunch file."""
@@ -66,7 +67,7 @@ class SimulationControl(object):
         # create a wall clock timer that has a 4 times longer timeout (= gazebo real time factor 0.25)
         # this is needed as backup if gazebo fails to start the simulation time
         threading.Timer(4 * self._mission_sim_time_in_sec, self.callback_max_wall_time_reached)
-        CiLog.info("Simulation timer started.")
+        CiLog.info("Simulation timer started. Simtime is %s" % self._mission_sim_time_in_sec)
 
     def monitor_behavior_status(self):
         """Subscribe flexbe status topic to be notified when behavior has stopped."""
@@ -89,6 +90,7 @@ class SimulationControl(object):
         """Callback that is used to indicate when maximum simulation_time is reached."""
         self.perform_final_actions()
         self._max_sim_time_reached = True
+        CiLog.info("Simulation timer finished.")
 
     def callback_max_wall_time_reached(self, event):
         """Callback that is used to indicate when maximum wall time is reached."""
