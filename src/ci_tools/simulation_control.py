@@ -20,7 +20,7 @@ class SimulationControl(object):
 
         self._mission_finalizers = ""
         self._mission_sim_time_in_sec = 0
-        self._finalizer_classes = []
+        self._finalizer_functions = []
 
         self.read_ros_params()
         CiLog.info("Init of SimulationControl constructor finished.")
@@ -38,10 +38,10 @@ class SimulationControl(object):
         if len(self._mission_finalizers) > 0:
             mission_finalizers_list = self._mission_finalizers.split(",")
             for mission_finalizer in mission_finalizers_list:
-                module_class = mission_finalizer.split(".")
+                module_name, finalizer = mission_finalizer.rsplit(".", 1)
                 try:
-                    module = __import__('finalizers.' + module_class[0], fromlist=[module_class[1]])
-                    self._finalizer_classes.append(getattr(module, module_class[1]))
+                    module = __import__('finalizers.' + module_name, fromlist=[finalizer])
+                    self._finalizer_functions.append(getattr(module, finalizer))
                 except Exception as e:
                     CiLog.error('Could not import finalizer "%s":\n%s' % (mission_finalizer, e))
 
@@ -74,9 +74,9 @@ class SimulationControl(object):
         self._flexbe_status_subscriber = rospy.Subscriber('/flexbe/status', BEStatus, self.callback_flexbe_status)
 
     def perform_final_actions(self):
-        """Calls final_action methods of all imported finalizers."""
-        for finalizer_class in self._finalizer_classes:
-            finalizer_class.final_action()
+        """Calls all imported finalizer_functions."""
+        for finalizer_function in self._finalizer_functions:
+            finalizer_function()
 
     def is_simulation_finished(self):
         """Returns true if maximum simulation or wall time have been reached or the behavior has finished."""
